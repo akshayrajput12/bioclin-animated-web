@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Loader from "../components/Loader";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import { ExpertiseSection } from "../components/ExpertiseSection";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -29,6 +30,7 @@ const Index = () => {
         >
           <Navbar />
           <Hero />
+          <ExpertiseSection />
         </motion.div>
       )}
     </>

@@ -1,7 +1,8 @@
-import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 import { renderCanvas } from "./ui/canvas";
 import { MarqueeAnimation } from "./ui/marquee-effect";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   useEffect(() => {
