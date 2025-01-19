@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { motion } from "framer-motion"
 import { renderCanvas } from "@/components/ui/canvas"
 import { Button } from "@/components/ui/button"
-import Link from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export function Hero() {
   useEffect(() => {
@@ -19,7 +19,7 @@ export function Hero() {
       />
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
         <motion.h1 
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-secondary mb-6"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#47BDAB] mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -27,7 +27,7 @@ export function Hero() {
           Welcome to BioClinPharm
         </motion.h1>
         <motion.p 
-          className="text-xl md:text-2xl text-primary mb-8"
+          className="text-xl md:text-2xl text-[#013B46] mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -49,12 +49,12 @@ export function Hero() {
           className="flex gap-4 justify-center"
         >
           <Link to="/contact">
-            <Button size="lg" variant="default">
+            <Button size="lg" variant="default" className="bg-[#47BDAB] hover:bg-[#47BDAB]/90">
               Get Started
             </Button>
           </Link>
           <Link to="/about">
-            <Button size="lg" variant="outline">
+            <Button size="lg" variant="outline" className="border-[#47BDAB] text-[#47BDAB] hover:bg-[#47BDAB]/10">
               Learn More
             </Button>
           </Link>
