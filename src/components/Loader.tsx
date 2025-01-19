@@ -25,13 +25,13 @@ const Loader = () => {
           }}
           className="w-24 h-24 mb-4"
         >
-          <div className="w-full h-full rounded-full border-4 border-primary border-t-transparent animate-spin" />
+          <div className="w-full h-full rounded-full border-4 border-[#47BDAB] border-t-transparent animate-spin" />
         </motion.div>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="text-2xl font-bold text-secondary"
+          className="text-2xl font-bold text-[#013B46]"
         >
           BioClinPharm
         </motion.h1>

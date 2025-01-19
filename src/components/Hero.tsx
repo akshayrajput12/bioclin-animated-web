@@ -9,7 +9,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="min-h-screen pt-20 flex items-center bg-gradient-to-b from-white to-accent/10 relative">
+    <section className="min-h-screen pt-20 flex items-center bg-gradient-to-b from-white to-[#C5B5CC]/10 relative">
       <canvas
         className="pointer-events-none absolute inset-0 mx-auto"
         id="canvas"
@@ -22,10 +22,10 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto text-center"
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-secondary mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-[#013B46] mb-6">
             Welcome to BioClinPharm
           </h1>
-          <h2 className="text-2xl md:text-3xl text-primary mb-8">
+          <h2 className="text-2xl md:text-3xl text-[#47BDAB] mb-8">
             Excellence in Clinical Trials and Research
           </h2>
           <p className="text-lg text-gray-700 mb-12">
@@ -37,7 +37,7 @@ const Hero = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition-colors duration-300"
+            className="bg-[#47BDAB] text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#013B46] transition-colors duration-300"
           >
             Learn More
           </motion.button>
@@ -47,14 +47,14 @@ const Hero = () => {
           <MarqueeAnimation
             direction="left"
             baseVelocity={-3}
-            className="bg-primary/10 text-secondary py-2"
+            className="bg-[#47BDAB]/10 text-[#013B46] py-2"
           >
             Excellence in Clinical Research
           </MarqueeAnimation>
           <MarqueeAnimation
             direction="right"
             baseVelocity={-3}
-            className="bg-secondary/10 text-primary py-2"
+            className="bg-[#013B46]/10 text-[#47BDAB] py-2"
           >
             Innovation in Healthcare
           </MarqueeAnimation>

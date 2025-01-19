@@ -18,26 +18,24 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
-          <Link to="/" className="text-2xl font-bold text-secondary">
+          <Link to="/" className="text-2xl font-bold text-[#013B46]">
             BioClinPharm
           </Link>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.path}
-                className="text-secondary hover:text-primary transition-colors duration-300"
+                className="text-[#013B46] hover:text-[#47BDAB] transition-colors duration-300"
               >
                 {item.name}
               </Link>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-secondary"
+            className="md:hidden text-[#013B46]"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -45,7 +43,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <motion.div
         initial={false}
         animate={{ height: isOpen ? "auto" : 0 }}
@@ -56,7 +53,7 @@ const Navbar = () => {
             <Link
               key={item.name}
               to={item.path}
-              className="block py-2 text-secondary hover:text-primary transition-colors duration-300"
+              className="block py-2 text-[#013B46] hover:text-[#47BDAB] transition-colors duration-300"
               onClick={() => setIsOpen(false)}
             >
               {item.name}
