@@ -1,9 +1,21 @@
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { renderCanvas } from "./ui/canvas";
+import { MarqueeAnimation } from "./ui/marquee-effect";
 
 const Hero = () => {
+  useEffect(() => {
+    renderCanvas();
+  }, []);
+
   return (
-    <section className="min-h-screen pt-20 flex items-center bg-gradient-to-b from-white to-accent/10">
-      <div className="container mx-auto px-4">
+    <section className="min-h-screen pt-20 flex items-center bg-gradient-to-b from-white to-accent/10 relative">
+      <canvas
+        className="pointer-events-none absolute inset-0 mx-auto"
+        id="canvas"
+      ></canvas>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -30,6 +42,23 @@ const Hero = () => {
             Learn More
           </motion.button>
         </motion.div>
+
+        <div className="mt-20">
+          <MarqueeAnimation
+            direction="left"
+            baseVelocity={-3}
+            className="bg-primary/10 text-secondary py-2"
+          >
+            Excellence in Clinical Research
+          </MarqueeAnimation>
+          <MarqueeAnimation
+            direction="right"
+            baseVelocity={-3}
+            className="bg-secondary/10 text-primary py-2"
+          >
+            Innovation in Healthcare
+          </MarqueeAnimation>
+        </div>
       </div>
     </section>
   );
