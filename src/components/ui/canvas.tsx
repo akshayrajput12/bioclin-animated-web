@@ -103,3 +103,4 @@ export const renderCanvas = function () {
   resizeCanvas();
   render();
 };
+
