@@ -1,17 +1,38 @@
-import { Hero } from "@/components/Hero"
-import { ExpertiseSection } from "@/components/ExpertiseSection"
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Loader from "../components/Loader";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
 
-export default function Index() {
+const Index = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <main className="min-h-screen">
-      <Hero />
-      <ExpertiseSection />
-      <div className="text-center mt-8">
-        <h2 className="text-3xl font-bold">Welcome to BioClinPharm</h2>
-        <p className="text-lg text-muted-foreground max-w-3xl mx-auto px-4">
-          Discover how our team's experience and meticulous approach to trial data management set us apart.
-        </p>
-      </div>
-    </main>
-  )
-}
+    <>
+      <AnimatePresence mode="wait">
+        {loading && <Loader />}
+      </AnimatePresence>
+
+      {!loading && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Navbar />
+          <Hero />
+        </motion.div>
+      )}
+    </>
+  );
+};
+
+export default Index;

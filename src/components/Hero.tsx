@@ -1,65 +1,67 @@
-"use client"
+import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { renderCanvas } from "./ui/canvas";
+import { MarqueeAnimation } from "./ui/marquee-effect";
 
-import { useEffect } from "react"
-import { motion } from "framer-motion"
-import { renderCanvas } from "@/components/ui/canvas"
-import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
-
-export function Hero() {
+const Hero = () => {
   useEffect(() => {
-    renderCanvas()
-  }, [])
+    renderCanvas();
+  }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="min-h-screen pt-20 flex items-center bg-gradient-to-b from-white to-accent/10 relative">
       <canvas
-        className="absolute inset-0 pointer-events-none"
+        className="pointer-events-none absolute inset-0 mx-auto"
         id="canvas"
-      />
-      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-        <motion.h1 
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#47BDAB] mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          Welcome to BioClinPharm
-        </motion.h1>
-        <motion.p 
-          className="text-xl md:text-2xl text-[#013B46] mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          Excellence in Clinical Trials and Research
-        </motion.p>
-        <motion.p 
-          className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          Bringing life-changing drugs to market through world-class expertise and technical innovation
-        </motion.p>
+      ></canvas>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex gap-4 justify-center"
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto text-center"
         >
-          <Link to="/contact">
-            <Button size="lg" variant="default" className="bg-[#47BDAB] hover:bg-[#47BDAB]/90">
-              Get Started
-            </Button>
-          </Link>
-          <Link to="/about">
-            <Button size="lg" variant="outline" className="border-[#47BDAB] text-[#47BDAB] hover:bg-[#47BDAB]/10">
-              Learn More
-            </Button>
-          </Link>
+          <h1 className="text-4xl md:text-6xl font-bold text-secondary mb-6">
+            Welcome to BioClinPharm
+          </h1>
+          <h2 className="text-2xl md:text-3xl text-primary mb-8">
+            Excellence in Clinical Trials and Research
+          </h2>
+          <p className="text-lg text-gray-700 mb-12">
+            By combining world-class expertise and technical innovation, with the
+            highest standards of regulatory and quality assurance, we stand
+            shoulder to shoulder with our clients as a seamless and reliable
+            extension of their team.
+          </p>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition-colors duration-300"
+          >
+            Learn More
+          </motion.button>
         </motion.div>
+
+        <div className="mt-20">
+          <MarqueeAnimation
+            direction="left"
+            baseVelocity={-3}
+            className="bg-primary/10 text-secondary py-2"
+          >
+            Excellence in Clinical Research
+          </MarqueeAnimation>
+          <MarqueeAnimation
+            direction="right"
+            baseVelocity={-3}
+            className="bg-secondary/10 text-primary py-2"
+          >
+            Innovation in Healthcare
+          </MarqueeAnimation>
+        </div>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export default Hero;
