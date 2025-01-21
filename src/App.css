@@ -1,10 +1,40 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Global Background and Layout */
+body {
+  background: linear-gradient(
+    135deg, 
+    hsl(var(--color-dark-teal) / 0.9), 
+    hsl(var(--color-dark-teal) / 0.8), 
+    hsl(var(--color-teal) / 0.5)
+  );
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: hsl(var(--color-white));
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
 }
 
+/* Root Container with Glassmorphism Effect */
+#root {
+  background: linear-gradient(
+    to right bottom, 
+    hsl(var(--color-teal) / 0.2), 
+    hsl(var(--color-lavender) / 0.1)
+  );
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid hsl(var(--color-white) / 0.1);
+  border-radius: 20px;
+  box-shadow: 
+    0 15px 25px rgba(0, 0, 0, 0.1), 
+    0 5px 10px rgba(0, 0, 0, 0.05);
+  margin: 30px;
+  padding: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Logo Styling */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -18,6 +48,113 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* Navbar Styling */
+.navbar {
+  background: linear-gradient(
+    90deg, 
+    hsl(var(--color-dark-teal) / 0.9), 
+    hsl(var(--color-teal) / 0.8)
+  );
+  color: hsl(var(--color-white));
+  padding: 15px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.navbar a {
+  color: hsl(var(--color-white));
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 500;
+  transition: 
+    color 0.3s ease, 
+    transform 0.2s ease;
+}
+
+.navbar a:hover {
+  color: hsl(var(--color-lavender));
+  transform: scale(1.05);
+}
+
+/* Typography */
+h1 {
+  color: hsl(var(--color-teal));
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px hsl(var(--color-dark-teal) / 0.3);
+}
+
+h2 {
+  color: hsl(var(--color-dark-teal));
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h3 {
+  color: hsl(var(--color-teal));
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+p {
+  color: hsl(var(--color-dark-teal));
+  line-height: 1.6;
+}
+
+/* Interactive Elements */
+button {
+  background: linear-gradient(
+    135deg, 
+    hsl(var(--color-teal)), 
+    hsl(var(--color-dark-teal))
+  );
+  color: hsl(var(--color-white));
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px hsl(var(--color-dark-teal) / 0.2);
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 6px 8px hsl(var(--color-dark-teal) / 0.3),
+    0 2px 4px hsl(var(--color-teal) / 0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  #root {
+    margin: 15px;
+    padding: 20px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar a {
+    margin: 10px 0;
+  }
+}
+
+/* Card Styling */
+.card {
+  padding: 2em;
+}
+
+/* Read the Docs Link */
+.read-the-docs {
+  color: #888;
+}
+
+/* Keyframe Animation */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -27,16 +164,9 @@
   }
 }
 
+/* Media Query for Reduced Motion */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }

@@ -143,28 +143,52 @@ function Node() {
   this.vx = 0;
 }
 
-export const renderCanvas = function () {
-  ctx = document.getElementById("canvas").getContext("2d");
+export const renderCanvas = function (canvas: HTMLCanvasElement) {
+  if (!canvas) {
+    console.error('Canvas element not found');
+    return;
+  }
+
+  ctx = canvas.getContext('2d');
+  if (!ctx) {
+    console.error('Could not get 2D context');
+    return;
+  }
+
   ctx.running = true;
   ctx.frame = 1;
+
+  // Initialize position
+  pos = { x: 0, y: 0 };
+  lines = [];
+
+  // Set up canvas size
+  const resizeCanvas = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  };
+
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
   f = new n({
     phase: Math.random() * 2 * Math.PI,
     amplitude: 85,
     frequency: 0.0015,
     offset: 285,
   });
-  document.addEventListener("mousemove", onMousemove);
-  document.addEventListener("touchstart", onMousemove);
-  document.body.addEventListener("orientationchange", resizeCanvas);
-  window.addEventListener("resize", resizeCanvas);
-  window.addEventListener("focus", () => {
-    if (!ctx.running) {
-      ctx.running = true;
-      render();
-    }
-  });
-  window.addEventListener("blur", () => {
-    ctx.running = true;
-  });
-  resizeCanvas();
+
+  document.addEventListener('mousemove', onMousemove);
+  document.addEventListener('touchstart', onMousemove);
+
+  // Start animation
+  render();
+
+  // Return cleanup function
+  return () => {
+    window.removeEventListener('resize', resizeCanvas);
+    document.removeEventListener('mousemove', onMousemove);
+    document.removeEventListener('touchstart', onMousemove);
+    ctx.running = false;
+  };
 };

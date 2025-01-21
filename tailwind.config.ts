@@ -19,10 +19,14 @@ export default {
     },
     extend: {
       colors: {
-        primary: "#47BDAB",
-        secondary: "#013B46",
-        accent: "#C5B5CC",
-        background: "#FFFFFF",
+        primary: "#0A6C74",    // Deep teal
+        secondary: "#1B4965",  // Navy blue
+        accent: "#62B6CB",     // Light blue
+        background: "#FFFFFF", // White
+        text: {
+          primary: "#1A1A1A",  // Almost black
+          secondary: "#4A5568" // Gray
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -60,6 +64,8 @@ export default {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
         serif: ["Merriweather", "serif"],
+        playfair: ['Playfair Display', 'serif'],
+        plusJakarta: ['Plus Jakarta Sans', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {
