@@ -3,7 +3,12 @@ interface Position {
   y: number;
 }
 
-interface Node {
+interface CanvasContext extends CanvasRenderingContext2D {
+  running?: boolean;
+  frame?: number;
+}
+
+interface NodeInterface {
   x: number;
   y: number;
   vx: number;
@@ -72,20 +77,20 @@ Line.prototype = {
       t,
       n = this.nodes[0].x,
       i = this.nodes[0].y;
-    ctx.beginPath();
-    ctx.moveTo(n, i);
+    ctx?.beginPath();
+    ctx?.moveTo(n, i);
     for (var a = 1, o = this.nodes.length - 2; a < o; a++) {
       e = this.nodes[a];
       t = this.nodes[a + 1];
       n = 0.5 * (e.x + t.x);
       i = 0.5 * (e.y + t.y);
-      ctx.quadraticCurveTo(e.x, e.y, n, i);
+      ctx?.quadraticCurveTo(e.x, e.y, n, i);
     }
     e = this.nodes[a];
     t = this.nodes[a + 1];
-    ctx.quadraticCurveTo(e.x, e.y, t.x, t.y);
-    ctx.stroke();
-    ctx.closePath();
+    ctx?.quadraticCurveTo(e.x, e.y, t.x, t.y);
+    ctx?.stroke();
+    ctx?.closePath();
   },
 };
 
@@ -125,7 +130,7 @@ function onMousemove(e: MouseEvent | TouchEvent) {
 }
 
 function render() {
-  if (ctx && ctx.running) {
+  if (ctx?.running) {
     ctx.globalCompositeOperation = "source-over";
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.globalCompositeOperation = "lighter";
@@ -135,19 +140,19 @@ function render() {
       (e = lines[t]).update();
       e.draw();
     }
-    ctx.frame++;
+    ctx.frame && ctx.frame++;
     window.requestAnimationFrame(render);
   }
 }
 
 function resizeCanvas() {
-  if (ctx && ctx.canvas) {
+  if (ctx?.canvas) {
     ctx.canvas.width = window.innerWidth - 20;
     ctx.canvas.height = window.innerHeight;
   }
 }
 
-let ctx: CanvasRenderingContext2D | null = null;
+let ctx: CanvasContext | null = null;
 let f: any;
 let e = 0;
 const pos: Position = { x: 0, y: 0 };
@@ -161,24 +166,19 @@ const E = {
   tension: 0.99,
 };
 
-class Node implements Node {
+class Node implements NodeInterface {
   x: number = 0;
   y: number = 0;
   vy: number = 0;
   vx: number = 0;
 }
 
-export const renderCanvas = function (canvas: HTMLCanvasElement) {
-  if (!canvas) {
-    console.error('Canvas element not found');
-    return;
-  }
-
-  ctx = canvas.getContext('2d');
-  if (!ctx) {
-    console.error('Could not get 2D context');
-    return;
-  }
+export const renderCanvas = function () {
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+  if (!canvas) return;
+  
+  ctx = canvas.getContext("2d") as CanvasContext;
+  if (!ctx) return;
 
   ctx.running = true;
   ctx.frame = 1;
