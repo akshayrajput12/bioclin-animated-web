@@ -1,8 +1,21 @@
-function n(e) {
+interface Position {
+  x: number;
+  y: number;
+}
+
+interface Node {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+}
+
+function n(e: any) {
   this.init(e || {});
 }
+
 n.prototype = {
-  init: function (e) {
+  init: function (e: any) {
     this.phase = e.phase || 0;
     this.offset = e.offset || 0;
     this.frequency = e.frequency || 0.001;
@@ -19,12 +32,12 @@ n.prototype = {
   },
 };
 
-function Line(e) {
+function Line(e: any) {
   this.init(e || {});
 }
 
 Line.prototype = {
-  init: function (e) {
+  init: function (e: any) {
     this.spring = e.spring + 0.1 * Math.random() - 0.05;
     this.friction = E.friction + 0.01 * Math.random() - 0.005;
     this.nodes = [];
@@ -76,34 +89,43 @@ Line.prototype = {
   },
 };
 
-function onMousemove(e) {
+function onMousemove(e: MouseEvent | TouchEvent) {
   function o() {
     lines = [];
     for (let e = 0; e < E.trails; e++)
       lines.push(new Line({ spring: 0.45 + (e / E.trails) * 0.025 }));
   }
-  function c(e) {
-    e.touches
-      ? ((pos.x = e.touches[0].pageX), (pos.y = e.touches[0].pageY))
-      : ((pos.x = e.clientX), (pos.y = e.clientY)),
-      e.preventDefault();
+
+  function c(e: MouseEvent | TouchEvent) {
+    if ('touches' in e) {
+      pos.x = e.touches[0].pageX;
+      pos.y = e.touches[0].pageY;
+    } else {
+      pos.x = (e as MouseEvent).clientX;
+      pos.y = (e as MouseEvent).clientY;
+    }
+    e.preventDefault();
   }
-  function l(e) {
-    1 == e.touches.length &&
-      ((pos.x = e.touches[0].pageX), (pos.y = e.touches[0].pageY));
+
+  function l(e: TouchEvent) {
+    if (e.touches.length === 1) {
+      pos.x = e.touches[0].pageX;
+      pos.y = e.touches[0].pageY;
+    }
   }
-  document.removeEventListener("mousemove", onMousemove),
-    document.removeEventListener("touchstart", onMousemove),
-    document.addEventListener("mousemove", c),
-    document.addEventListener("touchmove", c),
-    document.addEventListener("touchstart", l),
-    c(e),
-    o(),
-    render();
+
+  document.removeEventListener("mousemove", onMousemove);
+  document.removeEventListener("touchstart", onMousemove as any);
+  document.addEventListener("mousemove", c);
+  document.addEventListener("touchmove", c);
+  document.addEventListener("touchstart", l);
+  c(e);
+  o();
+  render();
 }
 
 function render() {
-  if (ctx.running) {
+  if (ctx && ctx.running) {
     ctx.globalCompositeOperation = "source-over";
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.globalCompositeOperation = "lighter";
@@ -119,28 +141,31 @@ function render() {
 }
 
 function resizeCanvas() {
-  ctx.canvas.width = window.innerWidth - 20;
-  ctx.canvas.height = window.innerHeight;
+  if (ctx && ctx.canvas) {
+    ctx.canvas.width = window.innerWidth - 20;
+    ctx.canvas.height = window.innerHeight;
+  }
 }
 
-var ctx,
-  f,
-  e = 0,
-  pos = {},
-  lines = [],
-  E = {
-    debug: true,
-    friction: 0.5,
-    trails: 80,
-    size: 50,
-    dampening: 0.025,
-    tension: 0.99,
-  };
-function Node() {
-  this.x = 0;
-  this.y = 0;
-  this.vy = 0;
-  this.vx = 0;
+let ctx: CanvasRenderingContext2D | null = null;
+let f: any;
+let e = 0;
+const pos: Position = { x: 0, y: 0 };
+let lines: any[] = [];
+const E = {
+  debug: true,
+  friction: 0.5,
+  trails: 80,
+  size: 50,
+  dampening: 0.025,
+  tension: 0.99,
+};
+
+class Node implements Node {
+  x: number = 0;
+  y: number = 0;
+  vy: number = 0;
+  vx: number = 0;
 }
 
 export const renderCanvas = function (canvas: HTMLCanvasElement) {
@@ -158,19 +183,6 @@ export const renderCanvas = function (canvas: HTMLCanvasElement) {
   ctx.running = true;
   ctx.frame = 1;
 
-  // Initialize position
-  pos = { x: 0, y: 0 };
-  lines = [];
-
-  // Set up canvas size
-  const resizeCanvas = () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  };
-
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
   f = new n({
     phase: Math.random() * 2 * Math.PI,
     amplitude: 85,
@@ -178,17 +190,20 @@ export const renderCanvas = function (canvas: HTMLCanvasElement) {
     offset: 285,
   });
 
-  document.addEventListener('mousemove', onMousemove);
-  document.addEventListener('touchstart', onMousemove);
-
-  // Start animation
-  render();
-
-  // Return cleanup function
-  return () => {
-    window.removeEventListener('resize', resizeCanvas);
-    document.removeEventListener('mousemove', onMousemove);
-    document.removeEventListener('touchstart', onMousemove);
-    ctx.running = false;
-  };
+  document.addEventListener("mousemove", onMousemove);
+  document.addEventListener("touchstart", onMousemove as any);
+  document.body.addEventListener("orientationchange", resizeCanvas);
+  window.addEventListener("resize", resizeCanvas);
+  window.addEventListener("focus", () => {
+    if (ctx && !ctx.running) {
+      ctx.running = true;
+      render();
+    }
+  });
+  window.addEventListener("blur", () => {
+    if (ctx) {
+      ctx.running = true;
+    }
+  });
+  resizeCanvas();
 };
