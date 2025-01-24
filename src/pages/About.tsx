@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ExpertiseSection } from "../components/ExpertiseSection";
 import AboutUs from "../components/AboutUs";
+import CircularRevealHeading from "../components/ui/circular-about";
+import { ThreeDPhotoCarouselDemo } from "../components/ui/carousel-demo";
 
 const About = () => {
   return (
@@ -15,8 +17,46 @@ const About = () => {
     >
       <Navbar />
       <div className="pt-20">
-        <AboutUs />
+        <CircularRevealHeading 
+          items={[
+            { 
+              text: "Research Excellence", 
+              image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1470&auto=format&fit=crop"
+            },
+            { 
+              text: "Clinical Innovation", 
+              image: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?q=80&w=1469&auto=format&fit=crop"
+            },
+            { 
+              text: "Healthcare Quality", 
+              image: "https://images.unsplash.com/photo-1585435557343-3b092031a831?q=80&w=1470&auto=format&fit=crop"
+            },
+            { 
+              text: "Patient Care", 
+              image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1470&auto=format&fit=crop"
+            },
+            { 
+              text: "Advanced Technology", 
+              image: "https://images.unsplash.com/photo-1579165466741-7f35e4755660?q=80&w=1470&auto=format&fit=crop"
+            }
+          ]}
+          centerText={
+            <div className="flex flex-col items-center justify-center space-y-2">
+              <span className="text-2xl font-bold">BioClin</span>
+              <span className="text-sm text-muted-foreground">Advancing Healthcare</span>
+            </div>
+          }
+          size="lg"
+          className="mx-auto"
+        />
         <ExpertiseSection />
+        <div className="py-16 bg-gradient-to-b from-transparent to-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-8">Our Global Impact</h2>
+            <ThreeDPhotoCarouselDemo />
+          </div>
+        </div>
+        <AboutUs />
       </div>
       <Footer />
     </motion.div>
