@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import ServicesSection from "../components/ServicesSection";
+
+import { BioclinGravity } from "../components/BioclinGravity";
+import { ServiceDetails } from "../components/ServiceDetails";
 
 const Services = () => {
   return (
@@ -14,7 +16,9 @@ const Services = () => {
     >
       <Navbar />
       <div className="pt-20">
-        <ServicesSection />
+        <BioclinGravity />
+        
+        <ServiceDetails />
       </div>
       <Footer />
     </motion.div>

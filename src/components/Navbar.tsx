@@ -1,67 +1,91 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
-import { NavBar } from "./ui/tubelight-navbar";
-import { Home, User, Briefcase, FileText } from "lucide-react";
+import React, { useState } from "react";
+import { Home, User, Briefcase, Phone, FileText, Menu, X } from "lucide-react";
+import { TubelightNavbar } from "./ui/tubelight-navbar";
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+
+const navItems = [
+  { name: "Home", url: "/", icon: Home },
+  { name: "About", url: "/about", icon: User },
+  { name: "Services", url: "/services", icon: Briefcase },
+  { name: "Career", url: "/career", icon: FileText },
+  { name: "Contact", url: "/contact", icon: Phone },
+];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navItems = [
-    { name: "Home", url: "/", icon: Home },
-    { name: "About", url: "/about", icon: User },
-    { name: "Career", url: "/career", icon: Briefcase },
-    { name: "Services", url: "/services", icon: FileText },
-    { name: "Contact", url: "/contact", icon: FileText },
-  ];
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center space-x-3">
-            <img src={logo} alt="BioClinPharm Logo" className="w-12 h-12 object-contain" />
-            <div className="flex flex-col">
-              <span className="font-playfair text-xl font-bold text-gray-800">BioClinPharm</span>
-              <span className="font-plusJakarta text-sm text-gray-600">A Data Science Company</span>
-            </div>
+        <div className="flex items-center justify-between h-24">
+          <Link 
+            to="/" 
+            className="flex items-center space-x-4 group"
+          >
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <img 
+                src={logo} 
+                alt="BioClinPharm Logo" 
+                className="w-16 h-16 object-contain transition-transform duration-300 group-hover:rotate-6" 
+              />
+            </motion.div>
+            <motion.div 
+              className="flex flex-col"
+              whileHover={{ x: 5 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <span className="font-playfair text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                BioClinPharm
+              </span>
+              <span className="font-plusJakarta text-sm text-gray-600 dark:text-gray-300">
+                A Data Science Company
+              </span>
+            </motion.div>
           </Link>
-
-          {/* Desktop Menu */}
-          <NavBar items={navItems} className="hidden md:flex space-x-8" />
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex flex-1 justify-center">
+            <TubelightNavbar items={navItems} />
+          </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-secondary"
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="md:hidden p-2 rounded-lg bg-primary/10 text-primary"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          </motion.button>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      <motion.div
-        initial={false}
-        animate={{ height: isOpen ? "auto" : 0 }}
-        className="md:hidden overflow-hidden bg-white"
-      >
-        <div className="container mx-auto px-4 py-4">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.url}
-              className="block py-2 text-secondary hover:text-primary transition-colors duration-300"
-              onClick={() => setIsOpen(false)}
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden overflow-hidden"
             >
-              {item.name}
-            </Link>
-          ))}
-        </div>
-      </motion.div>
-    </nav>
+              <div className="py-4">
+                <TubelightNavbar 
+                  items={navItems} 
+                  className="flex flex-col items-center space-y-2"
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </header>
   );
 };
 

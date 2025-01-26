@@ -3,6 +3,8 @@ import { NavBar } from "./tubelight-navbar";
 import { useScreenSize } from "../hooks/use-screen-size";
 import { PixelTrail } from "./pixel-trail";
 import { motion } from 'framer-motion';
+import React from "react";
+import { FeaturesSectionWithHoverEffects } from "./feature-section-with-hover-effects";
 
 export function NavBarDemo() {
   const navItems = [
@@ -60,3 +62,15 @@ export const PixelTrailDemo: React.FC = () => {
     </div>
   );
 };
+
+function FeaturesSectionWithHoverEffectsDemo() {
+  return (
+    <div className="min-h-screen w-full">
+      <div className="absolute top-0 left-0 w-full">
+        <FeaturesSectionWithHoverEffects />
+      </div>
+    </div>
+  );
+}
+
+export { FeaturesSectionWithHoverEffectsDemo };

@@ -2,9 +2,11 @@
 
 import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { LucideIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
+
+// Utility function to replace Next.js cn
+const cn = (...classes: string[]) => classes.filter(Boolean).join(" ")
 
 interface NavItem {
   name: string
@@ -17,7 +19,8 @@ interface NavBarProps {
   className?: string
 }
 
-export function NavBar({ items, className }: NavBarProps) {
+export function TubelightNavbar({ items, className }: NavBarProps) {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState(items[0].name)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -31,14 +34,22 @@ export function NavBar({ items, className }: NavBarProps) {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  useEffect(() => {
+    // Update active tab based on current route
+    const currentPath = location.pathname;
+    const currentItem = items.find(item => item.url === currentPath);
+    if (currentItem) {
+      setActiveTab(currentItem.name);
+    }
+  }, [location, items]);
+
   return (
-    <div
-      className={cn(
-        "fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6",
-        className,
-      )}
-    >
-      <div className="flex items-center gap-3 bg-background/5 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
+    <div className={cn("relative", className)}>
+      <div className={cn(
+        "flex items-center gap-3 backdrop-blur-lg rounded-full shadow-lg",
+        "md:bg-white/5 md:dark:bg-gray-800/5 md:border md:border-gray-200 md:dark:border-gray-700 md:py-2 md:px-3",
+        "flex-col md:flex-row w-full md:w-auto"
+      )}>
         {items.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
@@ -49,15 +60,14 @@ export function NavBar({ items, className }: NavBarProps) {
               to={item.url}
               onClick={() => setActiveTab(item.name)}
               className={cn(
-                "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors",
-                "text-foreground/80 hover:text-primary",
-                isActive && "bg-muted text-primary",
+                "relative cursor-pointer text-sm font-semibold transition-colors w-full md:w-auto",
+                "px-6 py-2 rounded-full flex items-center justify-center gap-2",
+                "text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary",
+                isActive && "text-primary"
               )}
             >
-              <span className="hidden md:inline">{item.name}</span>
-              <span className="md:hidden">
-                <Icon size={18} strokeWidth={2.5} />
-              </span>
+              <Icon size={18} strokeWidth={2.5} className="md:hidden" />
+              <span>{item.name}</span>
               {isActive && (
                 <motion.div
                   layoutId="lamp"

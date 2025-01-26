@@ -5,6 +5,7 @@ import { ExpertiseSection } from "../components/ExpertiseSection";
 import AboutUs from "../components/AboutUs";
 import CircularRevealHeading from "../components/ui/circular-about";
 import { ThreeDPhotoCarouselDemo } from "../components/ui/carousel-demo";
+import { BioclinTimeline } from "../components/BioclinTimeline";
 
 const About = () => {
   return (
@@ -57,6 +58,9 @@ const About = () => {
           </div>
         </div>
         <AboutUs />
+        <div className="py-16">
+          <BioclinTimeline />
+        </div>
       </div>
       <Footer />
     </motion.div>
