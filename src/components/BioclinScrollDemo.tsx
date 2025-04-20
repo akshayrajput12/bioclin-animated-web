@@ -24,7 +24,7 @@ export function BioclinScrollDemo() {
           />
           <div className="flex flex-col gap-4">
             <img
-              src="https://images.unsplash.com/photo-1581093458791-9f3c3900df48?q=80&w=1470"
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Data Analytics"
               className="w-full h-1/2 object-cover rounded-lg"
             />

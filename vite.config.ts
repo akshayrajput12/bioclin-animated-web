@@ -32,4 +32,29 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
+  // Production build optimizations
+  build: {
+    target: 'es2015',
+    outDir: 'dist',
+    assetsDir: 'assets',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'framer-motion'],
+          ui: ['@/components/ui'],
+        },
+      },
+    },
+    // Generate service worker during build
+    serviceWorker: true,
+    // Enable source maps for production debugging if needed
+    sourcemap: mode === 'development',
+  },
 }));
