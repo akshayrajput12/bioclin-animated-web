@@ -1,13 +1,55 @@
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionTemplate } from "framer-motion";
 import { renderCanvas } from "./ui/canvas";
 import { MarqueeAnimation } from "./ui/marquee-effect";
 import { Link } from "react-router-dom";
 import { ParticleButton } from "./ui/particle-button";
 import { LinkPreview } from "./ui/link-preview";
+import { MotionWrapper } from "./ui/motion-wrapper";
 
 const Hero = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Mouse parallax effect
+  const mouseX = useSpring(0);
+  const mouseY = useSpring(0);
+  
+  // Scroll animations
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+
+  // Text animation variants
+  const titleVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const wordVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -33,100 +75,106 @@ const Hero = () => {
     };
   }, []);
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = (clientX - left) / width;
+    const y = (clientY - top) / height;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
   return (
-    <section className="min-h-screen pt-20 flex items-center relative overflow-hidden font-poppins">
+    <motion.section
+      ref={containerRef}
+      className="min-h-screen pt-20 flex items-center relative overflow-hidden font-poppins"
+      onMouseMove={handleMouseMove}
+      style={{ scale }}
+    >
       <canvas
         ref={canvasRef}
         className="pointer-events-none absolute inset-0 mx-auto z-[1] opacity-30"
       ></canvas>
+      
+      {/* Animated background gradient */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20"
+        style={{ 
+          y,
+          opacity,
+          backgroundPosition: useMotionTemplate`${mouseX.get() * 100}% ${mouseY.get() * 100}%`
+        }}
+      />
+
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={titleVariants}
+          initial="hidden"
+          animate="visible"
           className="max-w-4xl mx-auto text-center"
         >
-          <h1 className="font-playfair text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Welcome to{" "}
-            <LinkPreview
-              url="/about"
-              className="bg-clip-text text-transparent bg-gradient-to-r from-primary/90 to-secondary/90 hover:from-secondary/90 hover:to-primary/90 transition-all duration-500 inline-block"
-              width={150}
-              height={90}
-              imageSrc="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?q=80&w=800&auto=format&fit=crop"
-            >
-              BioClinPharm
-            </LinkPreview>
-          </h1>
-          <h2 className="font-plusJakarta text-2xl md:text-4xl mb-8 text-gray-800 dark:text-gray-100 font-medium leading-relaxed">
-            <LinkPreview
-              url="/services"
-              className="text-primary/90 hover:text-secondary/90 transition-all duration-500 inline-block"
-              width={120}
-              height={70}
-              imageSrc="https://images.unsplash.com/photo-1579165466741-7f35e4755660?q=80&w=800&auto=format&fit=crop"
-            >
-              Excellence
-            </LinkPreview>{" "}
-            in Clinical Trials and{" "}
-            <LinkPreview
-              url="/research"
-              className="text-secondary/90 hover:text-primary/90 transition-all duration-500 inline-block"
-              width={120}
-              height={70}
-              imageSrc="https://images.unsplash.com/photo-1581093806997-124204d9fa9d?q=80&w=800&auto=format&fit=crop"
-            >
-              Research
-            </LinkPreview>
-          </h2>
-          <p className="font-plusJakarta text-xl mb-12 text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
-            By combining{" "}
-            <LinkPreview
-              url="/expertise"
-              className="bg-clip-text text-transparent bg-gradient-to-b from-primary/90 to-secondary/90 hover:from-secondary/90 hover:to-primary/90 transition-all duration-500 font-semibold inline-block"
-              width={120}
-              height={70}
-              imageSrc="https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=800&auto=format&fit=crop"
-            >
-              world-class expertise
-            </LinkPreview>{" "}
-            and{" "}
-            <LinkPreview
-              url="/innovation"
-              className="bg-clip-text text-transparent bg-gradient-to-b from-secondary/90 to-primary/90 hover:from-primary/90 hover:to-secondary/90 transition-all duration-500 font-semibold inline-block"
-              width={120}
-              height={70}
-              imageSrc="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=800&auto=format&fit=crop"
-            >
-              technical innovation
-            </LinkPreview>
-            , with the highest standards of{" "}
-            <LinkPreview
-              url="/quality"
-              className="bg-clip-text text-transparent bg-gradient-to-b from-primary/90 to-secondary/90 hover:from-secondary/90 hover:to-primary/90 transition-all duration-500 font-semibold inline-block"
-              width={120}
-              height={70}
-              imageSrc="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=800&auto=format&fit=crop"
-            >
-              regulatory and quality assurance
-            </LinkPreview>
-            , we stand shoulder to shoulder with our clients as a seamless and reliable extension of their team.
-          </p>
-          <ParticleButton
-            size="lg"
-            className="bg-primary/90 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-primary transition-colors duration-300 backdrop-blur-sm"
-            onClick={() => {
-              window.scrollTo({
-                top: window.innerHeight,
-                behavior: "smooth",
-              });
-            }}
+          <MotionWrapper type="entrance" className="mb-6">
+            <h1 className="font-playfair text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              Welcome to{" "}
+              <motion.span
+                className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent animate-gradient"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                BioClinPharm
+              </motion.span>
+            </h1>
+          </MotionWrapper>
+
+          <MotionWrapper type="scroll" className="mb-8">
+            <h2 className="font-plusJakarta text-2xl md:text-4xl text-gray-800 dark:text-gray-100 font-medium leading-relaxed">
+              Excellence in Clinical Trials and Research
+            </h2>
+          </MotionWrapper>
+
+          <motion.p
+            className="font-plusJakarta text-xl mb-12 text-gray-700 dark:text-gray-300 leading-relaxed"
+            variants={wordVariants}
           >
-            Learn More
-          </ParticleButton>
+            By combining world-class expertise and technical innovation with the highest standards
+            of regulatory and quality assurance, we stand shoulder to shoulder with our clients
+            as a seamless and reliable extension of their team.
+          </motion.p>
+
+          <MotionWrapper
+            className="flex justify-center gap-6"
+            whileHover={{ scale: 1 }}
+          >
+            <ParticleButton
+              className="glass-effect hover-lift"
+              onClick={() => {
+                window.scrollTo({
+                  top: window.innerHeight,
+                  behavior: "smooth",
+                });
+              }}
+            >
+              Learn More
+            </ParticleButton>
+            
+            <Link to="/contact">
+              <motion.button
+                className="bg-secondary/90 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition-colors duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Contact Us
+              </motion.button>
+            </Link>
+          </MotionWrapper>
         </motion.div>
 
-        <div className="mt-20">
+        <motion.div
+          className="mt-20"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
           <MarqueeAnimation
             direction="left"
             baseVelocity={-3}
@@ -141,9 +189,9 @@ const Hero = () => {
           >
             Innovation in Healthcare
           </MarqueeAnimation>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
