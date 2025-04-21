@@ -19,8 +19,11 @@ const TextScrollReveal: FC<TextScrollRevealProps> = ({
     offset: ["start end", "end start"],
   });
 
-  // Split text into words
-  const words = useMemo(() => text.split(" ").filter(Boolean), [text]);
+  // Split text into words (safely handle undefined/null text)
+  const words = useMemo(() => {
+    if (!text) return [];
+    return text.split(" ").filter(Boolean);
+  }, [text]);
 
   // Highlight important words with emphasis on data
   const keyWords = useMemo(() => [
@@ -45,6 +48,9 @@ const TextScrollReveal: FC<TextScrollRevealProps> = ({
 
   // Pre-calculate word properties
   const wordProperties = useMemo(() => {
+    // If no words, return empty array to prevent mapping errors
+    if (!words.length) return [];
+
     return words.map((word, i) => {
       const start = i / Math.max(words.length, 1); // Avoid division by zero
 
@@ -76,6 +82,18 @@ const TextScrollReveal: FC<TextScrollRevealProps> = ({
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
+        {/* Display a fallback message if no words are available */}
+        {!wordProperties.length && (
+          <motion.span
+            className="text-2xl text-gray-500 dark:text-gray-400"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            No text to display
+          </motion.span>
+        )}
+
         {wordProperties.map(({ word, isKeyWord, isDataWord, start }, i) => {
           // Scale effect for data words
           const scale = isDataWord ? 1.2 : 1;
