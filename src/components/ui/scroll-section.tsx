@@ -8,6 +8,7 @@ interface ScrollSectionProps extends React.HTMLAttributes<HTMLDivElement> {
   threshold?: number
   className?: string
   as?: "section" | "div"
+  variants?: any // Allow custom animation variants
 }
 
 export const ScrollSection = ({
@@ -15,6 +16,7 @@ export const ScrollSection = ({
   threshold = 0.1,
   className,
   as = "section",
+  variants = scrollAnimationVariants,
   ...props
 }: ScrollSectionProps) => {
   const { ref, controls } = useScrollAnimation(threshold)
@@ -25,7 +27,7 @@ export const ScrollSection = ({
       ref={ref}
       initial="hidden"
       animate={controls}
-      variants={scrollAnimationVariants}
+      variants={variants}
       className={cn("w-full", className)}
       {...props}
     >

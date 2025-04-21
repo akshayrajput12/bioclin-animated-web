@@ -15,13 +15,13 @@
     /* Light Mode Palette */
     --background: var(--color-white);
     --foreground: var(--color-dark-teal);
-    
+
     --primary: var(--color-teal);
     --primary-foreground: var(--color-white);
-    
+
     --secondary: var(--color-lavender);
     --secondary-foreground: var(--color-dark-teal);
-    
+
     --accent: var(--color-teal);
     --accent-foreground: var(--color-white);
 
@@ -48,13 +48,13 @@
     /* Dark Mode Palette */
     --background: var(--color-dark-teal);
     --foreground: var(--color-white);
-    
+
     --primary: var(--color-teal);
     --primary-foreground: var(--color-white);
-    
+
     --secondary: var(--color-lavender);
     --secondary-foreground: var(--color-white);
-    
+
     --accent: var(--color-lavender);
     --accent-foreground: var(--color-dark-teal);
 
@@ -79,22 +79,33 @@
     @apply bg-background text-foreground;
   }
 
-  /* Video Background Optimizations */
-  .video-background {
+  /* Performance optimizations for animations and transforms */
+  .video-background,
+  .sticky-image,
+  .animate-transform,
+  .expertise-image {
     will-change: transform;
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000;
   }
 
-  /* Ensure smooth scrolling */
+  /* Ensure smooth scrolling but disable during animations for better performance */
   html {
     scroll-behavior: smooth;
   }
+  html.disable-smooth-scroll {
+    scroll-behavior: auto;
+  }
 
-  /* Prevent layout shifts during video load */
+  /* Prevent layout shifts during image/video load */
   .min-h-screen {
     min-height: 100vh;
     min-height: 100dvh;
+  }
+
+  /* Optimize expertise section */
+  .expertise-section img {
+    content-visibility: auto;
   }
 }

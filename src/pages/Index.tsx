@@ -37,18 +37,19 @@ const Index = () => {
             className="bg-gradient-to-b from-gray-50 via-gray-100 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
           >
             <Navbar />
-            
+
             {/* Hero Section */}
             <Hero />
 
             {/* Scroll Demo Section */}
             <BioclinScrollDemo />
 
-            {/* Expertise Section with stagger animation */}
-            <ScrollSection 
-              threshold={0.2}
+            {/* Expertise Section with optimized loading */}
+            <ScrollSection
+              threshold={0.05} // Lower threshold for earlier loading
               variants={staggerAnimationVariants}
               className="py-24"
+              as="section"
             >
               <ExpertiseSection />
             </ScrollSection>
