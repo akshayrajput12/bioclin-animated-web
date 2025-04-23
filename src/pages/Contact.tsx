@@ -66,7 +66,7 @@ const Contact = () => {
                 <h3 className="text-2xl font-semibold mb-4">Contact Information</h3>
                 <div className="space-y-2">
                   <p className="text-gray-600 dark:text-gray-300">
-                    Email: info@bioclinpharm.com
+                    Email: hr@bioclinpharm.com
                   </p>
                   <p className="text-gray-600 dark:text-gray-300">
                     Phone: +1 (484) 630-1569
