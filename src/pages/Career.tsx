@@ -12,6 +12,14 @@ const jobOpenings = [
     id: "SAS-02",
     description: "Position: SAS Programmer I\nExperience: 0-5 years\nType: Full-time\nLocation: On-site\n\nI am interested in applying for the SAS Programmer I position at BioClinPharm."
   },
+    {
+    title: "Associate SAS Programmer",
+    experience: "3-5 years of experience",
+    type: "Full-time",
+    location: "Remote",
+    id: "SAS-05",
+    description: "Position: SAS Programmer I\nExperience: 0-5 years\nType: Full-time\nLocation: On-site\n\nI am interested in applying for the SAS Programmer I position at BioClinPharm."
+  },
   {
     title: "Bio-Statistician I",
     experience: "0-2 years of experience",
