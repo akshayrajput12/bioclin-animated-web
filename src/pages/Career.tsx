@@ -5,10 +5,10 @@ import { Upload, Mail, ArrowRight } from "lucide-react";
 
 const jobOpenings = [
   {
-    title: "SAS Programmer I",
-    experience: "0-5 years of experience",
+    title: "Sr. SAS Programmer",
+    experience: "5-10 years of experience",
     type: "Full-time",
-    location: "On-site",
+    location: "Remote",
     id: "SAS-01",
     description: "Position: SAS Programmer I\nExperience: 0-5 years\nType: Full-time\nLocation: On-site\n\nI am interested in applying for the SAS Programmer I position at BioClinPharm."
   },
@@ -16,7 +16,7 @@ const jobOpenings = [
     title: "Bio-Statistician I",
     experience: "0-2 years of experience",
     type: "Full-time",
-    location: "Hybrid",
+    location: "Remote",
     id: "BST-01",
     description: "Position: Bio-Statistician I\nExperience: 0-2 years\nType: Full-time\nLocation: Hybrid\n\nI am interested in applying for the Bio-Statistician I position at BioClinPharm."
   },
@@ -24,7 +24,7 @@ const jobOpenings = [
     title: "Business Development Analyst",
     experience: "0-4 years of experience",
     type: "Full-time",
-    location: "On-site",
+    location: "Remote",
     id: "BDA-01",
     description: "Position: Business Development Analyst\nExperience: 0-4 years\nType: Full-time\nLocation: On-site\n\nI am interested in applying for the Business Development Analyst position at BioClinPharm."
   },
@@ -32,7 +32,7 @@ const jobOpenings = [
     title: "Business Development Manager",
     experience: "6-10 years of experience",
     type: "Full-time",
-    location: "Hybrid",
+    location: "Remote",
     id: "BDM-01",
     description: "Position: Business Development Manager\nExperience: 6-10 years\nType: Full-time\nLocation: Hybrid\n\nI am interested in applying for the Business Development Manager position at BioClinPharm."
   },
