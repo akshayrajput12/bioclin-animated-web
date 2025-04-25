@@ -44,14 +44,6 @@ const jobOpenings = [
     id: "BDM-01",
     description: "Position: Business Development Manager\nExperience: 6-10 years\nType: Full-time\nLocation: Hybrid\n\nI am interested in applying for the Business Development Manager position at BioClinPharm."
   },
-  {
-    title: "Clinical Research Coordinator II",
-    experience: "2-4 years of experience",
-    type: "Full-time",
-    location: "On-site",
-    id: "CRC-01",
-    description: "Position: Clinical Research Coordinator II\nExperience: 2-4 years\nType: Full-time\nLocation: On-site\n\nI am interested in applying for the Clinical Research Coordinator II position at BioClinPharm."
-  },
 ];
 
 const containerVariants = {
