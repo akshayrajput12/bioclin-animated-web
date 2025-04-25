@@ -5,7 +5,15 @@ import { Upload, Mail, ArrowRight } from "lucide-react";
 
 const jobOpenings = [
   {
-    title: "Sr. SAS Programmer",
+    title: "Business Development Associate",
+    experience: "0-5 years of experience",
+    type: "Contractor",
+    location: "Remote",
+    id: "BDA-20",
+    description: "Position: Business Development Analyst\nExperience: 0-4 years\nType: Full-time\nLocation: On-site\n\nI am interested in applying for the Business Development Analyst position at BioClinPharm."
+  },
+  {
+    title: "Sr. Statistical Programmer",
     experience: "5-10 years of experience",
     type: "Full-time",
     location: "Remote",
@@ -13,11 +21,19 @@ const jobOpenings = [
     description: "Position: SAS Programmer I\nExperience: 0-5 years\nType: Full-time\nLocation: On-site\n\nI am interested in applying for the SAS Programmer I position at BioClinPharm."
   },
     {
-    title: "Associate SAS Programmer",
+    title: "Associate Statistical Programmer",
     experience: "3-5 years of experience",
     type: "Full-time",
     location: "Remote",
     id: "SAS-05",
+    description: "Position: SAS Programmer I\nExperience: 0-5 years\nType: Full-time\nLocation: On-site\n\nI am interested in applying for the SAS Programmer I position at BioClinPharm."
+  },
+  {
+    title: "Principal Statistical Programmer",
+    experience: "8-15 years of experience",
+    type: "Full-time",
+    location: "Remote",
+    id: "SAS-09",
     description: "Position: SAS Programmer I\nExperience: 0-5 years\nType: Full-time\nLocation: On-site\n\nI am interested in applying for the SAS Programmer I position at BioClinPharm."
   },
   {
