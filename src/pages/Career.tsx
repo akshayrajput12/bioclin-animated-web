@@ -1,7 +1,7 @@
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Upload, Mail, ArrowRight } from "lucide-react";
+import { Mail, ArrowRight } from "lucide-react";
 
 const jobOpenings = [
   {
@@ -124,7 +124,7 @@ const JobCard = ({ job }: { job: typeof jobOpenings[0] }) => {
 
       <div className="relative flex items-center justify-between">
         <div className="flex-1">
-          <motion.h3 
+          <motion.h3
             className="text-xl font-bold mb-2 font-playfair bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300 }}
@@ -136,14 +136,14 @@ const JobCard = ({ job }: { job: typeof jobOpenings[0] }) => {
               {job.experience} • {job.type} • {job.location}
             </p>
             <div className="flex gap-2">
-              <motion.span 
+              <motion.span
                 className="inline-block px-3 py-1 rounded-full text-xs bg-primary/10 text-primary"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
                 {job.type}
               </motion.span>
-              <motion.span 
+              <motion.span
                 className="inline-block px-3 py-1 rounded-full text-xs bg-secondary/10 text-secondary"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}
@@ -184,7 +184,7 @@ const Career = () => {
       className="min-h-screen bg-gradient-to-b from-gray-50 via-gray-100 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
     >
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
             <motion.div
@@ -208,7 +208,7 @@ const Career = () => {
               transition={{ delay: 0.4, duration: 0.8 }}
               className="text-xl text-gray-600 dark:text-gray-300 mb-12 font-plusJakarta"
             >
-              We are always looking for talented individuals to join our growing team. Upload your resume or contact our HR directly to explore career opportunities with us.
+              We are always looking for talented individuals to join our growing team. Contact our HR directly via email to explore career opportunities with us.
             </motion.p>
           </div>
         </motion.div>
@@ -231,7 +231,7 @@ const Career = () => {
         />
       </section>
 
-      {/* Upload Resume Section */}
+      {/* Email Resume Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -240,42 +240,28 @@ const Career = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="grid md:grid-cols-2 gap-8"
+              className="flex justify-center"
             >
-              {/* Upload Box */}
-              <motion.div
-                variants={itemVariants}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300"
-              >
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Upload className="w-8 h-8 text-primary" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 font-playfair">Upload Your Resume</h3>
-                  <label className="block w-full p-4 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary transition-colors duration-300">
-                    <input type="file" className="hidden" accept=".pdf,.doc,.docx" />
-                    <span className="text-sm text-gray-600 dark:text-gray-300">Drop your resume here or click to browse</span>
-                  </label>
-                </div>
-              </motion.div>
-
               {/* Email Box */}
               <motion.div
                 variants={itemVariants}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300"
+                className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300 max-w-md w-full"
               >
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Mail className="w-8 h-8 text-secondary" />
+                  <div className="w-20 h-20 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Mail className="w-10 h-10 text-secondary" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 font-playfair">Send via Email</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">Or send your resume directly to</p>
-                  <a
+                  <h3 className="text-2xl font-bold mb-4 font-playfair">Send Your Resume</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-6">Email your resume directly to our HR team</p>
+                  <motion.a
                     href="mailto:hr@bioclinpharm.com"
-                    className="text-primary hover:text-secondary transition-colors duration-300"
+                    className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-white hover:bg-secondary transition-colors duration-300 font-medium"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
+                    <Mail className="w-5 h-5 mr-2" />
                     hr@bioclinpharm.com
-                  </a>
+                  </motion.a>
                 </div>
               </motion.div>
             </motion.div>
