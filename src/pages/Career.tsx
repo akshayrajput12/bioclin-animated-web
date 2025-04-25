@@ -7,7 +7,7 @@ const jobOpenings = [
   {
     title: "Business Development Associate",
     experience: "0-5 years of experience",
-    type: "Contractor",
+    type: "Contract",
     location: "Remote",
     id: "BDA-20",
     description: "Position: Business Development Analyst\nExperience: 0-4 years\nType: Full-time\nLocation: On-site\n\nI am interested in applying for the Business Development Analyst position at BioClinPharm."
