@@ -12,6 +12,10 @@
     --color-lavender: 270 25% 75%; /* #C5B5CC - Soft Accent */
     --color-white: 0 0% 100%; /* #FFFFFF - Pure White */
 
+    /* RGB values for JavaScript usage */
+    --primary-rgb: 71, 189, 171; /* #47BDAB in RGB */
+    --secondary-rgb: 197, 181, 204; /* #C5B5CC in RGB */
+
     /* Light Mode Palette */
     --background: var(--color-white);
     --foreground: var(--color-dark-teal);

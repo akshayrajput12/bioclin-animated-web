@@ -10,6 +10,7 @@ import Career from "./pages/Career";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import WhatsAppButton from "./components/WhatsAppButton";
+import ChatBot from "./components/ChatBot";
 import { useState } from "react";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             </Routes>
           </AnimatePresence>
           <WhatsAppButton />
+          <ChatBot />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
