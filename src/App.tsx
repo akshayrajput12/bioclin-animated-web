@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Career from "./pages/Career";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
+import WhatsAppButton from "./components/WhatsAppButton";
 import { useState } from "react";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
             </Routes>
           </AnimatePresence>
+          <WhatsAppButton />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

@@ -55,11 +55,16 @@ module.exports = {
       },
       animation: {
         'wave-pulse': 'wave-pulse 4s ease-in-out infinite',
+        'ping': 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite',
       },
       keyframes: {
         'wave-pulse': {
           '0%, 100%': { opacity: 0.4 },
           '50%': { opacity: 0.7 },
+        },
+        'ping': {
+          '0%': { transform: 'scale(1)', opacity: 0.8 },
+          '75%, 100%': { transform: 'scale(1.5)', opacity: 0 },
         },
       },
     },
