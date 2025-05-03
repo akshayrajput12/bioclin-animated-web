@@ -4,9 +4,11 @@ import { MessageSquare, X, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { generateGeminiResponse } from "@/services/geminiService";
+import { ChatMessage } from "./ChatMessage";
+import { ChatInput } from "./ChatInput";
 
 // Message type definition
-interface Message {
+export interface Message {
   id: string;
   content: string;
   sender: "user" | "bot";
@@ -29,7 +31,7 @@ const initialMessages: Message[] = [
   },
   {
     id: "options",
-    content: "1️⃣ Customer Support\n2️⃣ General Inquiries\n3️⃣ Services Information",
+    content: "You can ask me about:\n• Our clinical research services\n• Data analytics capabilities\n• Regulatory affairs support\n• Contact information\n• Office locations",
     sender: "bot",
     timestamp: new Date(Date.now() + 200),
   },
@@ -41,7 +43,6 @@ const ChatBot = () => {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   // Auto-scroll to bottom of messages
   useEffect(() => {
@@ -49,15 +50,6 @@ const ChatBot = () => {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
-
-  // Focus input when chat opens
-  useEffect(() => {
-    if (isOpen && inputRef.current) {
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 300);
-    }
-  }, [isOpen]);
 
   // Generate a response using Gemini API
   const generateResponse = async (userMessage: string): Promise<string> => {
@@ -68,13 +60,13 @@ const ChatBot = () => {
       // If there was an error, use a fallback response
       if (response.error) {
         console.error("Error from Gemini API:", response.error);
-        return "I'm sorry, I encountered an error processing your request. Please try again later or contact our support team directly at hr@bioclinpharm.com.";
+        return "I'm sorry, I encountered an error processing your request. Please try again later or contact our support team directly at hr@bioclinpharm.com or call +1 (484) 630-1569.";
       }
 
       return response.text;
     } catch (error) {
       console.error("Error generating response:", error);
-      return "I'm sorry, I encountered an error processing your request. Please try again later or contact our support team directly.";
+      return "I'm sorry, I encountered an error processing your request. Please try again later or contact our support team directly at hr@bioclinpharm.com or call +1 (484) 630-1569.";
     }
   };
 
@@ -109,11 +101,13 @@ const ChatBot = () => {
     setIsLoading(false);
   };
 
-  // Handle input submission
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  // Handle key press (Enter to send)
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSendMessage();
+      if (inputValue.trim() && !isLoading) {
+        handleSendMessage();
+      }
     }
   };
 
@@ -130,6 +124,7 @@ const ChatBot = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? "Close chat" : "Open chat"}
       >
         {isOpen ? (
           <X className="h-6 w-6" />
@@ -174,92 +169,42 @@ const ChatBot = () => {
                 size="icon"
                 className="text-white hover:bg-white/20 rounded-full"
                 onClick={() => setIsOpen(false)}
+                aria-label="Close chat"
               >
                 <X className="h-4 w-4" />
               </Button>
             </div>
 
-            {/* Chat messages with elegant styling */}
+            {/* Chat messages */}
             <div className="h-80 overflow-y-auto p-4 bg-gray-50/80">
               {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`mb-4 flex ${
-                    message.sender === "user" ? "justify-end" : "justify-start"
-                  }`}
-                >
-                  {message.sender === "bot" && (
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-2 mt-1">
-                      <MessageSquare className="h-4 w-4 text-primary" />
-                    </div>
-                  )}
-                  <div
-                    className={`max-w-[75%] rounded-2xl px-4 py-3 ${
-                      message.sender === "user"
-                        ? "bg-gradient-to-br from-primary to-primary/90 text-white"
-                        : "bg-white shadow-sm border border-gray-100"
-                    }`}
-                    style={{
-                      borderTopLeftRadius: message.sender === "bot" ? "0" : undefined,
-                      borderTopRightRadius: message.sender === "user" ? "0" : undefined,
-                    }}
-                  >
-                    <p className="text-sm whitespace-pre-line leading-relaxed">{message.content}</p>
-                    <p className="text-xs mt-1 opacity-70 text-right">
-                      {message.timestamp.toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </p>
-                  </div>
-                </div>
+                <ChatMessage key={message.id} message={message} />
               ))}
+
+              {/* Loading indicator */}
               {isLoading && (
-                <div className="mb-4 flex justify-start">
-                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-2 mt-1">
-                    <MessageSquare className="h-4 w-4 text-primary" />
+                <div className="flex items-center space-x-2 p-2 mb-4">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Loader2 className="h-4 w-4 text-primary animate-spin" />
                   </div>
-                  <div className="max-w-[75%] rounded-2xl px-4 py-3 bg-white shadow-sm border border-gray-100" style={{ borderTopLeftRadius: 0 }}>
-                    <div className="flex items-center space-x-2">
-                      <div className="flex space-x-1">
-                        <span className="w-2 h-2 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "0ms" }}></span>
-                        <span className="w-2 h-2 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "150ms" }}></span>
-                        <span className="w-2 h-2 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "300ms" }}></span>
-                      </div>
-                    </div>
+                  <div className="bg-white shadow-sm border border-gray-100 rounded-2xl px-4 py-2">
+                    <p className="text-sm text-gray-500">Thinking...</p>
                   </div>
                 </div>
               )}
+
+              {/* Invisible element for auto-scrolling */}
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Chat input with elegant styling */}
-            <div className="p-4 border-t border-gray-100 bg-white">
-              <div className="flex items-center space-x-2">
-                <Input
-                  ref={inputRef}
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="Type your message..."
-                  className="flex-1 rounded-full border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary"
-                  disabled={isLoading}
-                />
-                <Button
-                  onClick={handleSendMessage}
-                  disabled={!inputValue.trim() || isLoading}
-                  size="icon"
-                  className="rounded-full bg-primary text-white hover:bg-primary/90 transition-all duration-200"
-                >
-                  <Send className="h-4 w-4" />
-                </Button>
-              </div>
-              <div className="mt-2 text-center">
-                <p className="text-xs text-gray-400">
-                  Powered by BioClinPharm AI
-                </p>
-              </div>
-            </div>
+            {/* Chat input */}
+            <ChatInput
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyDown}
+              onSend={handleSendMessage}
+              isLoading={isLoading}
+            />
           </motion.div>
         )}
       </AnimatePresence>

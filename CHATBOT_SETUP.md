@@ -1,6 +1,6 @@
 # BioClinPharm AI Chatbot Setup
 
-This document provides instructions for setting up the BioClinPharm AI Chatbot with Google's Gemini API.
+This document provides instructions for setting up and customizing the BioClinPharm AI Chatbot with Google's Gemini API.
 
 ## Getting a Gemini API Key
 
@@ -15,14 +15,12 @@ This document provides instructions for setting up the BioClinPharm AI Chatbot w
 2. Add your Gemini API key to the `.env` file:
 
 ```
-GEMINI_API_KEY=your_gemini_api_key_here
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 3. Replace `your_gemini_api_key_here` with the actual API key you obtained from Google AI Studio
 
-## Configuring Vite to Use Environment Variables
-
-The project is already set up to use environment variables with Vite. If you need to make any changes, you can edit the `vite.config.ts` file.
+> **Important**: For Vite applications, environment variables must be prefixed with `VITE_` to be accessible in the client-side code.
 
 ## Testing the Chatbot
 
@@ -39,16 +37,38 @@ npm run dev
 
 You can customize the chatbot's behavior by modifying the following files:
 
-- `src/components/ChatBot.tsx`: The main chatbot component
+### Main Components
+
+- `src/components/chatbot/ChatBot.tsx`: The main chatbot component
+- `src/components/chatbot/ChatMessage.tsx`: Component for rendering individual chat messages
+- `src/components/chatbot/ChatInput.tsx`: Component for the chat input field
+
+### Gemini API Integration
+
 - `src/services/geminiService.ts`: The service that handles API calls to Gemini
+
+### Customizing the Prompt
+
+To customize how the chatbot responds to user queries, edit the prompt in `src/services/geminiService.ts`. Look for the following section:
+
+```typescript
+text: `You are a helpful customer support assistant for BioClinPharm...`
+```
+
+You can modify this prompt to change the chatbot's personality, knowledge, and response style.
+
+### Customizing the UI
+
+To change the appearance of the chatbot, edit the CSS classes in the component files. The chatbot uses Tailwind CSS for styling.
 
 ## Troubleshooting
 
 If you encounter any issues:
 
 1. Make sure your API key is correct and properly set in the `.env` file
-2. Check the browser console for any error messages
-3. Ensure you have an active internet connection
-4. Verify that you haven't exceeded your Gemini API quota
+2. Check that the environment variable is prefixed with `VITE_` (required for Vite applications)
+3. Check the browser console for any error messages
+4. Ensure you have an active internet connection
+5. Verify that you haven't exceeded your Gemini API quota
 
 For more information about the Gemini API, visit [Google AI Studio documentation](https://ai.google.dev/docs).

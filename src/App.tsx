@@ -10,7 +10,7 @@ import Career from "./pages/Career";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import WhatsAppButton from "./components/WhatsAppButton";
-import ChatBot from "./components/ChatBot";
+import { ChatBot } from "./components/chatbot";
 import { useState } from "react";
 
 function App() {
