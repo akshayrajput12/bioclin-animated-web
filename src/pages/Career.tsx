@@ -46,7 +46,7 @@ const jobOpenings = [
   },
   {
     title: "Business Development Analyst",
-    experience: "0-4 years of experience",
+    experience: "0-1 years of experience",
     type: "Full-time",
     location: "Remote",
     id: "BDA-01",
