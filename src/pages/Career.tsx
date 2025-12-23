@@ -22,7 +22,7 @@ const jobOpenings = [
   },
     {
     title: "Associate Statistical Programmer",
-    experience: "3-5 years of experience",
+    experience: "1-3 years of experience",
     type: "Full-time",
     location: "Remote",
     id: "SAS-05",
