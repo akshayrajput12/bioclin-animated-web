@@ -6,7 +6,7 @@ import { Mail, ArrowRight } from "lucide-react";
 const jobOpenings = [
   {
     title: "Business Development Associate",
-    experience: "0-5 years of experience",
+    experience: "0-1 years of experience",
     type: "Contract",
     location: "Remote",
     id: "BDA-20",
