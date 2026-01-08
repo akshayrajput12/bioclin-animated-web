@@ -106,6 +106,9 @@ const Contact = () => {
                     <p className="text-gray-600 dark:text-gray-300">
                       Konark Orchid, Wagholi, Pune, India-412207
                     </p>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Phone: +91-9390281309
+                    </p>
                   </div>
                 </div>
               </div>
