@@ -58,6 +58,7 @@ export const generateGeminiResponse = async (prompt: string): Promise<GeminiResp
                 COMPANY INFORMATION:
                 - Email: hr@bioclinpharm.com
                 - Phone: +1 (484) 630-1569
+                - India Phone: +91-9390281309
                 - USA Office: 332 Sugartown Road, Devon, Pennsylvania, 19333
                 - India Office: Konark Orchid, Wagholi, Pune, India-412207
                 - Services: Clinical trial management, data analysis, biostatistics, regulatory consulting
