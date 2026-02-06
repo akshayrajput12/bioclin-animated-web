@@ -57,9 +57,9 @@ export const generateGeminiResponse = async (prompt: string): Promise<GeminiResp
 
                 COMPANY INFORMATION:
                 - Email: hr@bioclinpharm.com
-                - Phone: +1 (484) 630-1569
+                - Phone: +91-9390281309
                 - USA Office: 332 Sugartown Road, Devon, Pennsylvania, 19333
-                - India Office: Konark Orchid, Wagholi, Pune, India-412207
+                - India Office: #11, Bhannergerghatta road, Bangalore, Karnataka, India Pincode-560076
                 - Services: Clinical trial management, data analysis, biostatistics, regulatory consulting
                 - Expertise: Data science, healthcare analytics, clinical research, regulatory compliance
                 - Website: https://bioclinpharm.com
@@ -99,20 +99,20 @@ export const generateGeminiResponse = async (prompt: string): Promise<GeminiResp
     if (data.error) {
       console.error("Gemini API error:", data.error);
       return {
-        text: "I'm sorry, I encountered an error processing your request. Please try again later or contact our support team directly at hr@bioclinpharm.com or call +1 (484) 630-1569.",
+        text: "I'm sorry, I encountered an error processing your request. Please try again later or contact our support team directly at hr@bioclinpharm.com or call +91-9390281309.",
         error: data.error.message || "Unknown API error"
       };
     }
 
     // Extract the generated text from the response
     const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text ||
-                          "I'm sorry, I couldn't generate a response at this time. Please contact our team at hr@bioclinpharm.com or call +1 (484) 630-1569 for assistance.";
+      "I'm sorry, I couldn't generate a response at this time. Please contact our team at hr@bioclinpharm.com or call +91-9390281309 for assistance.";
 
     return { text: generatedText };
   } catch (error) {
     console.error("Error calling Gemini API:", error);
     return {
-      text: "I'm sorry, I encountered an error. Please try again later or contact our support team directly at hr@bioclinpharm.com or call +1 (484) 630-1569.",
+      text: "I'm sorry, I encountered an error. Please try again later or contact our support team directly at hr@bioclinpharm.com or call +91-9390281309.",
       error: error instanceof Error ? error.message : String(error)
     };
   }
@@ -128,7 +128,7 @@ const getFallbackResponse = (prompt: string): GeminiResponse => {
 
   if (lowercasePrompt.includes("customer support") || lowercasePrompt.includes("help")) {
     return {
-      text: "Our customer support team is available Monday to Friday, 9 AM to 5 PM IST. You can reach us at hr@bioclinpharm.com or call +1 (484) 630-1569 for immediate assistance."
+      text: "Our customer support team is available Monday to Friday, 9 AM to 5 PM IST. You can reach us at hr@bioclinpharm.com or call +91-9390281309 for immediate assistance."
     };
   }
   else if (lowercasePrompt.includes("services") || lowercasePrompt.includes("offerings")) {
@@ -138,12 +138,12 @@ const getFallbackResponse = (prompt: string): GeminiResponse => {
   }
   else if (lowercasePrompt.includes("location") || lowercasePrompt.includes("office") || lowercasePrompt.includes("address")) {
     return {
-      text: "We have offices in the USA (332 Sugartown Road, Devon, Pennsylvania, 19333) and India (Konark Orchid, Wagholi, Pune, India-412207). Our teams work collaboratively across these locations to serve clients globally."
+      text: "We have offices in the USA (332 Sugartown Road, Devon, Pennsylvania, 19333) and India (#11, Bhannergerghatta road, Bangalore, Karnataka, India Pincode-560076). Our teams work collaboratively across these locations to serve clients globally."
     };
   }
   else if (lowercasePrompt.includes("contact") || lowercasePrompt.includes("email") || lowercasePrompt.includes("phone") || lowercasePrompt.includes("whatsapp")) {
     return {
-      text: "You can contact us at hr@bioclinpharm.com or call +1 (484) 630-1569 for any inquiries. We're available Monday to Friday, 9 AM to 5 PM IST."
+      text: "You can contact us at hr@bioclinpharm.com or call +91-9390281309 for any inquiries. We're available Monday to Friday, 9 AM to 5 PM IST."
     };
   }
   else if (lowercasePrompt.includes("clinical") || lowercasePrompt.includes("trial") || lowercasePrompt.includes("research")) {

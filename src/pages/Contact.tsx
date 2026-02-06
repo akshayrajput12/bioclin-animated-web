@@ -104,7 +104,7 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold">India</h4>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Konark Orchid, Wagholi, Pune, India-412207
+                      #11, Bhannergerghatta road, Bangalore, Karnataka, India Pincode-560076
                     </p>
                   </div>
                 </div>
@@ -116,7 +116,7 @@ const Contact = () => {
                     Email: hr@bioclinpharm.com
                   </p>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Phone: +1 (484) 630-1569
+                    Phone: +91-9390281309
                   </p>
                 </div>
               </div>

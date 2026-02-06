@@ -21,16 +21,16 @@ const Footer = () => {
   const addresses = [
     {
       title: "Registered Office",
-      address: "Konark Orchid, Wagholi, Pune, India-412207",
-      phone: "+91 9182665924",
+      address: "#11, Bhannergerghatta road, Bangalore, Karnataka, India Pincode-560076",
+      phone: "+91-9390281309",
       email: "hr@bioclinpharm.com",
       website: "www.bioclinpharm.com",
     },
     {
       title: "India Office",
       address:
-        "Hno 11-13-50, Alkapuri Colony, Ramakrishnapuram, Kothapet, Hyderabad, Telangana 500035, India",
-      phone: "+91 9182665924",
+        "#11, Bhannergerghatta road, Bangalore, Karnataka, India Pincode-560076",
+      phone: "+91-9390281309",
     },
     {
       title: "USA Offices",
