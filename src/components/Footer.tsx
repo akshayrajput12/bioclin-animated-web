@@ -22,15 +22,17 @@ const Footer = () => {
     {
       title: "Registered Office",
       address: "#11, Bhannergerghatta road, Bangalore, Karnataka, India Pincode-560076",
-      phone: "+91-9390281309",
+      phone: "+91-9182665924 / +91-9390281309",
       email: "hr@bioclinpharm.com",
       website: "www.bioclinpharm.com",
     },
     {
-      title: "India Office",
-      address:
+      title: "India Offices",
+      addresses: [
         "#11, Bhannergerghatta road, Bangalore, Karnataka, India Pincode-560076",
-      phone: "+91-9390281309",
+        "Flat - 14, Block-B, Maheshwari Towers, Prem Nagar Rd, Shyam Rao Nagar, Banjara Hills, Hyderabad, Telangana 500034",
+      ],
+      phone: "+91-9182665924 / +91-9390281309",
     },
     {
       title: "USA Offices",

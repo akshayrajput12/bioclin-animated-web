@@ -103,9 +103,14 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold">India</h4>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      #11, Bhannergerghatta road, Bangalore, Karnataka, India Pincode-560076
-                    </p>
+                    <div className="space-y-4">
+                      <p className="text-gray-600 dark:text-gray-300">
+                        #11, Bhannergerghatta road, Bangalore, Karnataka, India Pincode-560076
+                      </p>
+                      <p className="text-gray-600 dark:text-gray-300">
+                        Flat - 14, Block-B, Maheshwari Towers, Prem Nagar Rd, Shyam Rao Nagar, Banjara Hills, Hyderabad, Telangana 500034
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -116,7 +121,7 @@ const Contact = () => {
                     Email: hr@bioclinpharm.com
                   </p>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Phone: +91-9390281309
+                    Phone: +91-9182665924 / +91-9390281309
                   </p>
                 </div>
               </div>

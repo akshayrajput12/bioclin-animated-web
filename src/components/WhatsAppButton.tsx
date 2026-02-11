@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 const WhatsAppButton = () => {
-  const phoneNumber = "919390281309"; // Format without + for WhatsApp API
+  const phoneNumber = "919182665924"; // Format without + for WhatsApp API
   const whatsappUrl = `https://wa.me/${phoneNumber}`;
   const [isHovered, setIsHovered] = useState(false);
 
