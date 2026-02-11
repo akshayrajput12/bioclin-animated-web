@@ -119,7 +119,7 @@ const Contact = () => {
                     Email: hr@bioclinpharm.com
                   </p>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Phone: +91-9390281309/+91-9182665924
+                    Phone: +91-9182665924/+91-9390281309
                   </p>
                 </div>
               </div>
