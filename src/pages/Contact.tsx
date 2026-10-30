@@ -106,7 +106,7 @@ const Contact = () => {
                     <div className="space-y-4">
                       <p className="text-gray-600 dark:text-gray-300">
                         #11, Bhannergerghatta road, Bangalore, Karnataka, India Pincode-560076
-                      </p>
+                      </p> 
                      </div>
                   </div>
                 </div>
