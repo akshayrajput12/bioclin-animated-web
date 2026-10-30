@@ -110,10 +110,7 @@ const Contact = () => {
                       <p className="text-gray-600 dark:text-gray-300">
                        Suite E, 1st Floor, 8-1-298/6, Dwarakanagar Colony, Shaikpet, Raidurgam, Hyderabad, Telangana - 500008
                       </p>
-                      <p className="text-gray-600 dark:text-gray-300">
-                        Suite E, 1st Floor, 8-1-298/C, Dwarkanagar Colony, Raidurg, Shaikpet, Hyderabad, Telangana 500034, India
-                        </p>
-                      </div>
+                     </div>
                   </div>
                 </div>
               </div>
